@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseBaseToken = 'AIzaSyBR_2RHJC5D6foAYHUmjAlGLKOnkdi-erw';
   //
-  // final storage = const FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   String password = '';
   // String get getpassword => password;
 
@@ -45,7 +45,7 @@ class AuthService extends ChangeNotifier {
     print(decodedResp);
 
     if (decodedResp.containsKey('idToken')) {
-      // await storage.write(key: 'token', value: decodedResp['idToken']);
+      await storage.write(key: 'token', value: decodedResp['idToken']);
       return null;
     } else {
       return decodedResp['error']['message'];
@@ -77,10 +77,20 @@ class AuthService extends ChangeNotifier {
     print(decodedResp);
 
     if (decodedResp.containsKey('idToken')) {
+      await storage.write(key: 'token', value: decodedResp['idToken']);
       return null;
     } else {
       return decodedResp['error']['message'];
     }
+  }
+
+  Future logout() async {
+    await storage.delete(key: 'token');
+    return;
+  }
+
+  Future<String> readToken() async {
+    return await storage.read(key: 'token') ?? '';
   }
 }
 

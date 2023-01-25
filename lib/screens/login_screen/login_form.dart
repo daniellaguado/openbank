@@ -98,7 +98,7 @@ class LoginForm extends ConsumerWidget {
                 ),
               ),
               validator: ((value) {
-                if (value == null || value.length <= 9) {
+                if (value == null || value.length <= 6) {
                   return '';
                 }
                 return null;
@@ -139,8 +139,7 @@ class LoginForm extends ConsumerWidget {
                     print(errorMessage);
                   }
 
-                  // if (registerKey.formKey.currentState!.validate()) {
-                  // }
+                  loginKey.formKey.currentState!.validate();
                 }),
                 child: Container(
                     padding: const EdgeInsets.symmetric(
