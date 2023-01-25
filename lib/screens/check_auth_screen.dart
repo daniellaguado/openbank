@@ -41,7 +41,9 @@ class CheckAuthScreen extends ConsumerWidget {
                           transitionDuration: const Duration(seconds: 0)));
                 });
               }
-              return Container();
+              return Container(
+                child: Text('Aqui puede ir el lazy'),
+              );
             }),
       ),
     );

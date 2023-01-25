@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:openbank/provider/auth_http.dart';
+import 'package:openbank/ui/notifications.dart';
 import '../../provider/login_reg_auth.dart';
 import '../../ui/input_decorations.dart';
 
@@ -51,60 +52,60 @@ class RegisterForm extends ConsumerWidget {
             //
             //
             //========================================== CPF FIELD =================================
-            // TextFormField(
-            //   autovalidateMode: AutovalidateMode.onUserInteraction,
-            //   maxLength: 14,
-            //   inputFormatters: [maskFormatter],
-            //   keyboardType: TextInputType.phone,
-            //   decoration:
-            //       InputDecorations.formImputDecoration('C.P.F', null, null),
-            //   validator: ((value) {
-            //     if (value == null || value.length > 13) {
-            //       return null;
-            //     }
-            //     return '';
-            //   }),
-            // ),
-            // const SizedBox(
-            //   height: 30,
-            // ),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              maxLength: 14,
+              inputFormatters: [maskFormatter],
+              keyboardType: TextInputType.phone,
+              decoration:
+                  InputDecorations.formImputDecoration('C.P.F', null, null),
+              validator: ((value) {
+                if (value == null || value.length > 13) {
+                  return null;
+                }
+                return '';
+              }),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
             //
             //
             //
             //
             //========================================== DATE FIELD =================================
-            // TextFormField(
-            //     autovalidateMode: AutovalidateMode.onUserInteraction,
-            //     inputFormatters: [dateMask],
-            //     keyboardType: TextInputType.phone,
-            //     decoration: InputDecorations.formImputDecoration(
-            //       'Data de nascimento',
-            //       'dd/mm/yyyy',
-            //       null,
-            //     ),
-            //     validator: (value) {
-            //       if (value == null || value.isEmpty) {
-            //         return '';
-            //       }
-            //       final components = value.split("/");
-            //       if (components.length == 3) {
-            //         final day = int.tryParse(components[0]);
-            //         final month = int.tryParse(components[1]);
-            //         final year = int.tryParse(components[2]);
-            //         if (day != null && month != null && year != null) {
-            //           final date = DateTime(year, month, day);
-            //           if (date.year == year &&
-            //               date.month == month &&
-            //               date.day == day) {
-            //             return null;
-            //           }
-            //         }
-            //       }
-            //       return '';
-            //     }),
-            // const SizedBox(
-            //   height: 30,
-            // ),
+            TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                inputFormatters: [dateMask],
+                keyboardType: TextInputType.phone,
+                decoration: InputDecorations.formImputDecoration(
+                  'Data de nascimento',
+                  'dd/mm/yyyy',
+                  null,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '';
+                  }
+                  final components = value.split("/");
+                  if (components.length == 3) {
+                    final day = int.tryParse(components[0]);
+                    final month = int.tryParse(components[1]);
+                    final year = int.tryParse(components[2]);
+                    if (day != null && month != null && year != null) {
+                      final date = DateTime(year, month, day);
+                      if (date.year == year &&
+                          date.month == month &&
+                          date.day == day) {
+                        return null;
+                      }
+                    }
+                  }
+                  return '';
+                }),
+            const SizedBox(
+              height: 30,
+            ),
             //
             //
             //
@@ -195,8 +196,9 @@ class RegisterForm extends ConsumerWidget {
                 ),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: Colors.deepOrange,
+                color: Color.fromRGBO(86, 13, 50, 1),
                 onPressed: (() async {
+                  FocusScope.of(context).unfocus();
                   //
                   final errorMessage =
                       await ref.read(authServiceProvider).createUser(
@@ -204,11 +206,13 @@ class RegisterForm extends ConsumerWidget {
                             authService.password,
                           );
 
-                  if (errorMessage == null) {
-                    Navigator.pushReplacementNamed(context, 'home');
+                  if (registerKey.formKey.currentState!.validate() == true &&
+                      errorMessage == null) {
+                    Navigator.pushReplacementNamed(context, 'checkout');
                     registerKey.isLoading = true;
                   } else {
-                    //TODO: Mostrar mensaje de error en pantalla
+                    ScaffoldNotification.showSnakbar('$errorMessage');
+
                     print(errorMessage);
                   }
 

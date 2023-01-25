@@ -8,7 +8,7 @@ class LoginBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.orange[400],
+      color: Color.fromARGB(255, 251, 249, 252),
       width: double.infinity,
       height: double.infinity,
       child: Stack(children: [

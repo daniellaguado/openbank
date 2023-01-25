@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/screens.dart';
+import 'ui/notifications.dart';
 
 void main() => runApp(const ProviderScope(child: MyApp()));
 
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: ScaffoldNotification.messengerKey,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: 'checkout',

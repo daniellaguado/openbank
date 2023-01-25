@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:openbank/ui/notifications.dart';
 import '../../provider/auth_http.dart';
 import '../../provider/login_reg_auth.dart';
 import '../../ui/input_decorations.dart';
@@ -112,7 +113,7 @@ class LoginForm extends ConsumerWidget {
               height: 30,
             ),
             //
-            //
+
             //
             //
             //-------------- BUTTON LOGIN -----------------------------------//
@@ -122,20 +123,22 @@ class LoginForm extends ConsumerWidget {
                 ),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: Colors.deepOrange,
+                color: Color.fromRGBO(86, 13, 50, 1),
                 onPressed: (() async {
+                  FocusScope.of(context).unfocus();
+
                   //
                   final errorMessage =
                       await ref.read(authServiceProvider).login(
                             authService.email,
                             authService.password,
                           );
-
-                  if (errorMessage == null) {
+                  if (loginKey.formKey.currentState!.validate() == true &&
+                      errorMessage == null) {
                     Navigator.pushReplacementNamed(context, 'home');
                     loginKey.isLoading = true;
                   } else {
-                    //TODO: Mostrar mensaje de error en pantalla
+                    ScaffoldNotification.showSnakbar('$errorMessage');
                     print(errorMessage);
                   }
 
