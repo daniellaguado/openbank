@@ -25,21 +25,21 @@ class RegisterForm extends ConsumerWidget {
         child: Column(
           children: [
             //========================================== COMPLETE NAME FIELD ==============================
-            // TextFormField(
-            //   autovalidateMode: AutovalidateMode.onUserInteraction,
-            //   autocorrect: false,
-            //   keyboardType: TextInputType.name,
-            //   decoration: InputDecorations.formImputDecoration(
-            //       'Nome completo', null, null),
-            //   validator: ((value) {
-            //     String pattern =
-            //         r'^([A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+[\-]{0,1}[A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+)(\s+([A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+[\-]{0,1}[A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+))*$';
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autocorrect: false,
+              keyboardType: TextInputType.name,
+              decoration: InputDecorations.formImputDecoration(
+                  'Nome completo', null, null),
+              validator: ((value) {
+                String pattern =
+                    r'^([A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+[\-]{0,1}[A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+)(\s+([A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+[\-]{0,1}[A-Za-zÑñÃãÁáÉéÍíÕõÓóÚú]+))*$';
 
-            //     RegExp regExp = RegExp(pattern);
+                RegExp regExp = RegExp(pattern);
 
-            //     return regExp.hasMatch(value ?? '') ? null : '';
-            //   }),
-            // ),
+                return regExp.hasMatch(value ?? '') ? null : '';
+              }),
+            ),
             //
             //
             //
@@ -67,7 +67,7 @@ class RegisterForm extends ConsumerWidget {
               }),
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             //
             //

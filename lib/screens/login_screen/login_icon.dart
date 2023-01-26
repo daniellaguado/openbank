@@ -9,7 +9,7 @@ class LoginIconCard extends StatelessWidget {
         width: double.infinity,
         child: Icon(
           Icons.all_inclusive_sharp,
-          color: Colors.white,
+          color: Color.fromRGBO(86, 13, 50, 1),
           size: 100,
         ));
   }

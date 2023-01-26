@@ -4,6 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
+final authServiceProvider = ChangeNotifierProvider<AuthService>((ref) {
+  return AuthService();
+});
+
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseBaseToken = 'AIzaSyBR_2RHJC5D6foAYHUmjAlGLKOnkdi-erw';
@@ -86,6 +90,7 @@ class AuthService extends ChangeNotifier {
 
   Future logout() async {
     await storage.delete(key: 'token');
+    notifyListeners();
   }
 
   Future<String> readToken() async {
@@ -95,6 +100,4 @@ class AuthService extends ChangeNotifier {
 
 //
 //
-final authServiceProvider = ChangeNotifierProvider<AuthService>((ref) {
-  return AuthService();
-});
+

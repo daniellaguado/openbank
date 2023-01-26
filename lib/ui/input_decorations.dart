@@ -14,8 +14,7 @@ class InputDecorations {
           borderSide: BorderSide(color: Color.fromARGB(255, 197, 196, 196)),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: Color.fromARGB(255, 255, 255, 255), width: 2),
+          borderSide: BorderSide(color: Colors.black, width: 2),
         ),
         // hintText: 'CPF',
         labelText: labelText,

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         'register': (_) => const RegisterScreen(),
         'home': (_) => const HomeScreen(),
         'checkout': (_) => const CheckAuthScreen(),
+        'usercard': (_) => const HomeUserCard(),
       },
     );
   }
